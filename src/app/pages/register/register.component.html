@@ -1,0 +1,33 @@
+<div class="register-container">
+    <h2>Cadastro</h2>
+    <form #form="ngForm" (ngSubmit)="onRegister()" novalidate>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="name" name="name" required />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          email
+          #emailField="ngModel"
+        />
+        <mat-error *ngIf="emailField.invalid && emailField.touched">
+          Informe um e-mail válido.
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput [(ngModel)]="password" name="password" required type="password" />
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Cadastrar</button>
+    </form>
+</div>

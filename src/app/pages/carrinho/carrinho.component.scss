@@ -1,0 +1,103 @@
+.carrinho-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+mat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  gap: 1rem;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  .item-info {
+    flex: 1;
+    padding-right: 1rem;
+
+    strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    p {
+      margin: 0;
+      color: #666;
+    }
+  }
+
+  mat-icon-button {
+    margin-left: 1rem;
+  }
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  color: #333;
+}
+
+button.mat-raised-button {
+  margin-top: 2rem;
+  display: block;
+  margin-left: auto;
+}
+
+.preco-quantidade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #555;
+  
+  span {
+    white-space: nowrap;
+  }
+}
+
+.carrinho-vazio {
+  text-align: center;
+  margin-top: 4rem;
+  color: #777;
+
+  img {
+    width: 150px;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+.item-detalhes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 2rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+
+  span {
+    text-align: right;
+  }
+}
+
+.finalizar-compra {
+  text-align: right;
+  margin-top: 2rem;
+}

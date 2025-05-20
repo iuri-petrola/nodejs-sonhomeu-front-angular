@@ -1,3 +1,34 @@
+
+# criar projeto
+ng new front-Angular --style=scss
+
+# Criar componentes
+ng generate component shared/header
+ng generate component shared/footer
+ng generate component shared/banner
+ng generate component shared/card
+ng generate component shared/container
+ng generate component pages/home
+ng generate component shared/card-busca
+ng generate component shared/form-busca
+ng generate component shared/modal
+ng generate service   core/servicos/produtos
+ng generate environments
+ng generate service core/servicos/auth
+ng generate component pages/login
+ng generate component pages/register
+ng generate component pages/carrinho
+ng generate service core/servicos/carrinho
+
+# Angular material
+# https://material.angular.dev/
+ng add @angular/material
+
+
+
+# ##########################################################################################################################
+
+
 # FrontAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.

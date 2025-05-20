@@ -1,0 +1,45 @@
+<header class="app-header">
+    <mat-toolbar>
+        <img [routerLink]="'/'" src="assets/imagens/logo-header.png" alt="Logo Sonho Meu">
+        <span class="spacer"></span>
+        <a 
+            mat-icon-button
+            href="https://wa.me/5585996270455" 
+            target="_blank"
+            rel="noopener"
+            aria-label="WhatsApp"
+        >
+            <img src="assets/icones/whatsapp.png" alt="Ícone do whatsapp">
+        </a>
+
+        <a
+            mat-icon-button
+            href="https://www.instagram.com/iuri_e_lucy"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"                    
+        >
+            <img src="assets/icones/instagram.png" alt="Ícone do instagram">
+        </a>
+
+        <!--<button mat-raised-button color="primary">CADASTRE-SE</button>-->
+        <button *ngIf="!isLoggedIn()" mat-button (click)="goToRegister()">
+            <mat-icon>person_add</mat-icon> CADASTRE-SE
+        </button>
+        <!-- Botão visível só quando NÃO estiver logado -->
+        <button *ngIf="!isLoggedIn()" mat-button (click)="goToLogin()">
+            <mat-icon>login</mat-icon> LOGIN
+        </button>
+
+        <button *ngIf="isLoggedIn()" mat-button [routerLink]="'/carrinho'">
+            <mat-icon>shopping_cart</mat-icon>
+            Ver Carrinho
+        </button>
+
+
+        <!-- Botão de logout visível só quando estiver logado -->
+        <button *ngIf="isLoggedIn()" mat-button (click)="logout()">
+            <mat-icon>logout</mat-icon> SAIR
+        </button>
+    </mat-toolbar>
+</header>

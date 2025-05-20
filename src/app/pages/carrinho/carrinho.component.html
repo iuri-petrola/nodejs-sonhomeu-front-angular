@@ -1,0 +1,36 @@
+<div class="carrinho-container" *ngIf="itens.length > 0; else vazio">
+    <h2>Seu Carrinho</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let item of itens">
+        <div class="item-info">
+          <strong>{{ item.product.name }}</strong>
+          <div class="item-detalhes">
+            <span>Preço unitário: R$ {{ item.product.price | number:'1.2-2' }}</span> 
+            <span> Qtd: {{ item.quantity }} </span>
+            <span>Subtotal: R$ {{ item.product.price * item.quantity | number:'1.2-2' }}</span>
+          </div>
+        </div>
+        <!--
+        <button mat-icon-button color="warn" (click)="removerItem(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        -->
+    </mat-list-item>
+    </mat-list>
+    <div class="total">
+      Total: R$ {{ total | number:'1.2-2' }}
+    </div>
+    <div class="finalizar-compra">
+      <button mat-raised-button color="primary" (click)="finalizarCompra()">
+        Finalizar Compra
+      </button>
+    </div>
+
+</div>
+  
+<ng-template #vazio>
+    <div class="carrinho-vazio">
+        <img src="assets/imagens/carrinho-vazio.png" alt="Carrinho vazio" />
+        <p>O carrinho está vazio.</p>
+    </div>
+</ng-template>

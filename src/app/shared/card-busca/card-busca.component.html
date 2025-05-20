@@ -1,0 +1,25 @@
+<mat-card class="card-busca">
+    <img mat-card-image
+      src="{{ produtos.banner }}" alt="Imagem do produto">
+    <mat-card-content>
+      <ul>
+        <li>{{ produtos.name }}</li>
+        <li>R$ {{ produtos.price }}</li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button color="secondary" (click)="adicionarAoCarrinho(produtos.id)">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+      <!--
+      <button mat-flat-button color="primary" (click)="adicionarAoCarrinho(produtos.id)">
+        ADICIONAR AO CARRINHO
+      </button>
+      -->
+    </mat-card-actions>
+    <!--
+    <mat-card-actions>
+      <button mat-flat-button color="primary">VER DETALHES</button>
+    </mat-card-actions>
+    -->
+</mat-card>
