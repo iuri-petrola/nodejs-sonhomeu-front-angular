@@ -1,9 +1,9 @@
 # docker build e push image
 
-    docker build 
+    docker build -t iuripetrola/nodejs-someu-front-angular:latest . --push
     #--build-arg  NEXT_PUBLIC_API_IMG_URL="http://nodejs-someu-back:3333/files/" 
     #--build-arg baseURL="http://nodejs-someu-back:3333" 
-    -t iuripetrola/nodejs-someu-front:latest . --push
+    
 
 
 # Criar rede
@@ -11,10 +11,10 @@
 
 
 # Iniciar container App
-    docker run -itd 
+    docker run -itd --name nodejs-someu-front-angular -h nodejs-someu-front-angular --net net_someu --restart unless-stopped -p 80:80 iuripetrola/nodejs-someu-front-angular:latest 
     #--env baseURL="http://nodejs-someu-back:3333" 
     #--env NEXT_PUBLIC_API_IMG_URL="http://nodejs-someu-back:3333/files/" 
-    --name nodejs-someu-front -h nodejs-someu-front --net net_someu --restart unless-stopped  -p 3000:3000 iuripetrola/nodejs-someu-front:latest  
+    
     
     # --mount type=bind,source=/app/img/,target=/app/img/
     
