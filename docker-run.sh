@@ -11,7 +11,7 @@
 
 
 # Iniciar container App
-    docker run -itd --name nodejs-someu-front-angular -h nodejs-someu-front-angular --net net_someu --restart unless-stopped -p 80:80 iuripetrola/nodejs-someu-front-angular:latest 
+    docker run -itd --name nodejs-someu-front-angular -h nodejs-someu-front-angular --net net_someu --restart unless-stopped -p 80:80 -p 443:443 iuripetrola/nodejs-someu-front-angular:latest 
     #--env baseURL="http://nodejs-someu-back:3333" 
     #--env NEXT_PUBLIC_API_IMG_URL="http://nodejs-someu-back:3333/files/" 
     

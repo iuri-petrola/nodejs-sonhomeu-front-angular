@@ -35,7 +35,7 @@ RUN npm run build
 FROM ubuntu:22.04
 
 # instalação de pacotes basicos
-RUN apt update && apt install -y vim links unzip telnet wget inetutils-ping net-tools nginx
+RUN apt update && apt install -y curl vim links unzip telnet wget inetutils-ping net-tools nginx
 
 # Instalação do locale pt_BR
 RUN apt update &&  apt install -y locales && rm -rf /var/lib/apt/lists/* && localedef -i pt_BR -c -f UTF-8 -A /usr/share/locale/locale.alias pt_BR.UTF-8
@@ -45,13 +45,20 @@ ENV LANG pt_BR.utf8
 RUN apt update && apt install tzdata -y 
 RUN	echo "America/Fortaleza" > /etc/timezone && rm -f  /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
+# copiar o projeto compilado para root do nginx
 WORKDIR /var/www/html/
 COPY --from=build /app/dist .
 
-COPY sonhomeu.conf /etc/nginx/sites-available
+# Habilitar SSL
+# Instale o Certbot (Let's Encrypt)
+RUN  apt update && apt install certbot python3-certbot-nginx -y
 
+# Obter o certificado em modo silent
+RUN certbot --nginx --non-interactive --agree-tos --email iuri.petrola@gmail.com -d sonhomeuloja.com
+
+# Copiar arquivos de comfiguraçao do proxy
 COPY sonhomeu.conf /etc/nginx/conf.d
-
+COPY sonhomeu.conf /etc/nginx/sites-available
 RUN ln -s /etc/nginx/sites-available/sonhomeu.conf /etc/nginx/sites-enabled/
 
 CMD ["nginx", "-g", "daemon off;"]
