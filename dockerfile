@@ -54,7 +54,10 @@ COPY --from=build /app/dist .
 RUN  apt update && apt install certbot python3-certbot-nginx -y
 
 # Obter o certificado em modo silent
-RUN certbot --nginx --non-interactive --agree-tos --email iuri.petrola@gmail.com -d sonhomeuloja.com
+#RUN certbot --nginx --non-interactive --agree-tos --email iuri.petrola@gmail.com -d sonhomeuloja.com
+
+# Copiar arquivos de configuraçao do ssl
+COPY ssl/letsencrypt /etc/
 
 # Copiar arquivos de comfiguraçao do proxy
 COPY sonhomeu.conf /etc/nginx/conf.d
