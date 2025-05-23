@@ -57,7 +57,7 @@ RUN  apt update && apt install certbot python3-certbot-nginx -y
 #RUN certbot --nginx --non-interactive --agree-tos --email iuri.petrola@gmail.com -d sonhomeuloja.com
 
 # Copiar arquivos de configuraçao do ssl
-COPY ssl/letsencrypt /etc/
+COPY ssl/letsencrypt /etc/letsencrypt
 
 # Copiar arquivos de comfiguraçao do proxy
 COPY sonhomeu.conf /etc/nginx/conf.d
