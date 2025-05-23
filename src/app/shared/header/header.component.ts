@@ -21,6 +21,8 @@ export class HeaderComponent {
     this.alert.success('Logout realizado com sucesso !.');
   }
 
+  menuAberto = false;
+  
   goToLogin() {
     this.router.navigate(['/login']);
   }
