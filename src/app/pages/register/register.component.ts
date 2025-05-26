@@ -13,6 +13,7 @@ export class RegisterComponent {
   name = '';
   email = '';
   password = '';
+  whatsapp = '';
 
   constructor(
     private auth: AuthService,
@@ -24,7 +25,8 @@ export class RegisterComponent {
     this.auth.register({
       name: this.name,
       email: this.email,
-      password: this.password
+      password: this.password,
+      whatsapp: this.whatsapp
     }).subscribe({
       next: () => {
         this.alert.success('Cadastro realizado com sucesso!');

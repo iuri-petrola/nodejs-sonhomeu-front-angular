@@ -27,6 +27,23 @@
         <mat-label>Senha</mat-label>
         <input matInput [(ngModel)]="password" name="password" required type="password" />
       </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cel/Whats</mat-label>
+        <input matInput
+          type="tel"
+          name="whatsapp"
+          [(ngModel)]="whatsapp"
+          pattern="^(\d{10,11})$"
+          #whats="ngModel"
+          mask="(00) 00000-0000"
+          required
+        />
+        <mat-error *ngIf="whats.invalid && whats.touched">
+          Informe um número válido com DDD e 11 dígitos.
+        </mat-error>
+      </mat-form-field>
+
   
       <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Cadastrar</button>
     </form>
