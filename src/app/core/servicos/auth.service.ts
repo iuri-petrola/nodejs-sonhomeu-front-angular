@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   // Método register para cadastro de usuários
-  register(data: { name: string; email: string; password: string }): Observable<any> {
+  register(data: { name: string; email: string; password: string; whatsapp: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/users`, data);
   }
 
