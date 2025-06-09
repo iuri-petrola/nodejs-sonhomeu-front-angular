@@ -90,4 +90,12 @@
   .mat-mdc-outlined-button:not(:disabled) {
     border-color: white;
   }
+
+  .user-welcome {
+    font-size: 1.0rem;   // tamanho menor
+    font-weight: 400;     // peso mais leve
+    color: white;         // ou outra cor, se o fundo for claro
+    margin-right: 12px; 
+  }
+
 }

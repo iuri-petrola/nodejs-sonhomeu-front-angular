@@ -44,6 +44,14 @@ export class AuthService {
     return this.userId || localStorage.getItem('userId');
   }
 
+  setUserName(name: string): void {
+    localStorage.setItem('userName', name);
+  }
+
+  getUserName(): string | null {
+    return localStorage.getItem('userName');
+  }
+
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
@@ -62,6 +70,7 @@ export class AuthService {
       tap(response => {
         this.setToken(response.token);
         this.setUserId(response.id);
+        this.setUserName(response.name);
       })
     );
   }
