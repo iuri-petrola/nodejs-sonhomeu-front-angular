@@ -1,0 +1,23 @@
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 12px;
+  z-index: 1000;
+  width: 30px;
+  height: 30px;
+  background-color: #25d366; // ✅ verde oficial WhatsApp
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+@media (max-width: 600px) {
+  .whatsapp-float {
+    right: 25px; // ⬅️ mais afastado em mobile, se preferir
+    bottom: 25px;
+  }
+}
