@@ -1,53 +1,50 @@
 .app-footer {
-    background-color: rgb(146, 50, 224);
-    color: white;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    .inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        img {
-            max-width: 100%;
-            max-height: 40px;
-        }
-        ul {
-            padding: 0;
-            list-style: none;
-            &.socials {
-                li {
-                text-align: center;
-                }
-            }
-        }
+  background-color: #8702c9;
+  color: white;
+  padding: 24px 16px;
+  font-size: 0.9rem;
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-col {
+    flex: 1 1 250px;
+    min-width: 200px;
+
+    p {
+      margin: 8px 0;
     }
 
-    .formas-pagamento {
-        list-style: none;
-        padding: 0;
-
-        li {
-            margin-bottom: 8px;
-            color: #fff; // ou ajuste para o seu tema
-            font-size: 0.95rem;
-        }
-
-        .icones-pagamento {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 12px;
-            margin-top: 6px;
-
-            img {
-                width: 50px;
-                height: auto;
-                background: white;
-                padding: 4px;
-                border-radius: 6px;
-            }
-        }
+    img {
+      max-width: 60px;
+      margin: 4px;
     }
 
+    .footer-logo {
+      max-width: 140px;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+// Responsivo: stack em colunas no mobile
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-col img {
+    margin: 8px auto;
+  }
 }
