@@ -29,3 +29,5 @@ spec:
   ports:
     - port: 443
       targetPort: 443
+      nodePort: 443
+  type: NodePort
