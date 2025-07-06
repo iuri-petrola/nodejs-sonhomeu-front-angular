@@ -16,13 +16,13 @@
 
    # Salve como: cluster-issuer.yaml
 
-    kubectl apply -f cluster-issuer.yaml
+    kubectl apply -f kube-adm/cluster-issuer.yaml
 
 # 4) Crie o Ingress para seu domínio
 
    # Salve como: ingress-sonhomeu-front-angular.yaml
 
-    kubectl apply -f ingress-front-angular-back.yaml
+    kubectl apply -f kube-adm/ingress-front-angular-back.yaml
 
 
 # 5) Verifique
