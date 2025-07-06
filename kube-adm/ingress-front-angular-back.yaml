@@ -1,0 +1,33 @@
+# ingress-loja.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-front-angular-back
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: / #reescrever url caso app nao tenha o endpoint definido no path
+spec:
+  tls:
+    - hosts:
+        - sonhomeuloja.com
+      secretName: sonhomeuloja-tls
+  rules:
+    - host: sonhomeuloja.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nodejs-someu-front-angular
+                port:
+                  number: 80
+          - path: /api/
+            pathType: Prefix
+            backend:
+              service:
+                name: nodejs-someu-back
+                port:
+                  number: 8080

@@ -17,7 +17,7 @@ export class AlertService {
       icon: 'success',
       title,
       text: msg,
-      confirmButtonText: 'Beleza',
+      confirmButtonText: 'Ok',
     });
   }
 
@@ -57,7 +57,7 @@ export class AlertService {
       icon: 'success',
       title,
       text: msg,
-      confirmButtonText: 'Beleza',
+      confirmButtonText: 'Ok',
     });
   }
 

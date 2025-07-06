@@ -16,11 +16,20 @@ export class HeaderComponent {
     private router: Router
   ) {}
 
+  userName: string | null = null;
+  
+  ngOnInit(): void {
+    this.userName = this.authService.getUserName();
+  }
+
+
   logout() {
     this.authService.logout();
     this.alert.success('Logout realizado com sucesso !.');
   }
 
+  menuAberto = false;
+  
   goToLogin() {
     this.router.navigate(['/login']);
   }

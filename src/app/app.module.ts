@@ -30,6 +30,8 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { MatListModule } from '@angular/material/list';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 
 @NgModule({
@@ -64,7 +66,8 @@ import { MatListModule } from '@angular/material/list';
     MatDialogModule,
     HttpClientModule,
     FormsModule,
-    MatListModule
+    MatListModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     AuthService

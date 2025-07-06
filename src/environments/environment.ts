@@ -1,4 +1,4 @@
 export const environment = {
-    apiUrl: 'http://nodejs-someu-back',
+    apiUrl: 'https://sonhomeuloja.com/api',
     imgUrl: 'files'
 }

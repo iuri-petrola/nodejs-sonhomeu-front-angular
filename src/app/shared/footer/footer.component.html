@@ -1,41 +1,37 @@
 <footer class="app-footer">
-    <app-container>
-        <div class="inner">
-            <ul>
-                <li>
-                    <img [routerLink]="'/'" src="assets/imagens/logo-footer.png" alt="">
-                </li>
-                <li>
-                    Horário de atendimento: 08h - 21h (Segunda a Sábado)
-                </li>
-                <li>
-                    Desenvolvido por Iuri Petrola.
-                </li>
-            </ul>
-            <ul class="socials">
-                <li>Acesse nossas redes:</li>
-                <li>
-                    <a 
-                        mat-icon-button
-                        href="https://wa.me/5585996270455" 
-                        target="_blank"
-                        rel="noopener"
-                        aria-label="WhatsApp"
-                    >
-                        <img src="assets/icones/whatsapp.png" alt="Ícone do whatsapp">
-                    </a>
+  <app-container>
+    <div class="footer-content">
+      <!-- Coluna 1 -->
+      <div class="footer-col">
+        <img [routerLink]="'/'" src="assets/imagens/logo-footer.png" alt="Logo" class="footer-logo" />
+        <p>Horário de atendimento: 08h - 20h (Segunda a Sábado)</p>
+        <p>© Iuri Petrola 2025 · Todos os direitos reservados</p>
+      </div>
 
-                    <a
-                        mat-icon-button
-                        href="https://www.instagram.com/iuri_e_lucy"
-                        target="_blank"
-                        rel="noopener"
-                        aria-label="Instagram"                    
-                    >
-                        <img src="assets/icones/instagram.png" alt="Ícone do instagram">
-                    </a>
-                </li>
-            </ul>
+      <!-- Coluna 2 -->
+      <div class="footer-col">
+        <p><strong>Formas de pagamento:</strong></p>
+        <p>Crédito, Débito ou Pix</p>
+        <div class="icones-pagamento">
+          <img src="assets/imagens/visa.png" />
+          <img src="assets/imagens/mastercard.png" />
+          <img src="assets/imagens/pix.png" />
+          <!--<img src="assets/imagens/qrcode.png" (click)="abrirPixModal()" style="cursor: pointer;" /> -->
         </div>
-    </app-container>
+      </div>
+
+      <!-- Coluna 3 -->
+      <div class="footer-col">
+        <p><strong>Conheça nossas redes sociais</strong></p>
+        <!--
+        <a href="https://www.facebook.com/iurielucy" target="_blank">
+          <img src="assets/icones/facebook.png" />
+        </a>
+        -->
+        <a href="https://www.instagram.com/sonhomeulojaonline" target="_blank">
+          <img src="assets/icones/instagram.png" />
+        </a>
+      </div>
+    </div>
+  </app-container>
 </footer>
