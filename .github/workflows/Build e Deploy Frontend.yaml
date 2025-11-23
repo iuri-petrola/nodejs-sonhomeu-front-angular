@@ -8,7 +8,7 @@ on:
 jobs:
   Build:
     name: "Build frontend"
-    runs-on: [databasemart-sonhomeu-backend]
+    runs-on: [databasemart-sonhomeu-frontend]
     steps:
       - name: Obtendo o Codigo
         uses: actions/checkout@v4
