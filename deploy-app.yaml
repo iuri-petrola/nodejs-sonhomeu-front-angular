@@ -16,8 +16,6 @@ spec:
         - name: nodejs-someu-front-angular
           image: iuripetrola/nodejs-someu-front-angular:latest
           ports:
-          - containerPort: 80
-          ports:
           - containerPort: 443
 ---
 apiVersion: v1
