@@ -20,5 +20,5 @@ jobs:
       - name: Deploy no Kubernetes
         uses: Azure/k8s-deploy@v5
         with:
-          manifests: deploy-app-redirect.yaml
+          manifests: deploy-app.yaml
           images: iuripetrola/nodejs-someu-front-angular:latest
