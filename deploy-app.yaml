@@ -27,7 +27,7 @@ spec:
   selector: 
     app: nodejs-someu-front-angular
   ports:
-    - port: 80
+    - port: 443
       targetPort: 443
 #     nodePort: 443      
 # type: NodePort
