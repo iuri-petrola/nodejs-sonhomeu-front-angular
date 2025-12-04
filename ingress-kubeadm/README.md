@@ -32,9 +32,9 @@
 
 # Você deve ver:
 
-  #cert-manager-xxxxxxx     Running
-  #cert-manager-webhook.... Running
-  #cert-manager-cainjector. Running
+  # cert-manager-xxxxxxx     Running
+  # cert-manager-webhook.... Running
+  # cert-manager-cainjector. Running
 
 
 # 🟩 4. ClusterIssuer – Let's Encrypt (STAGING)
