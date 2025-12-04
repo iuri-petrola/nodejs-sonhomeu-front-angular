@@ -1,4 +1,4 @@
-name: Build e Deploy Frontend
+name: Build Frontend
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
   Build:
     name: "Build frontend"
-    runs-on: [databasemart-sonhomeu-frontend]
+    runs-on: [masterdaweb-sonhomeu-frontend]
     steps:
       - name: Obtendo o Codigo
         uses: actions/checkout@v4

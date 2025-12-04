@@ -51,18 +51,18 @@ COPY --from=build /app/dist .
 
 # Habilitar SSL
 # Instale o Certbot (Let's Encrypt)
-RUN  apt update && apt install certbot python3-certbot-nginx -y
+#RUN  apt update && apt install certbot python3-certbot-nginx -y
 
 # Obter o certificado em modo silent
 #RUN certbot --nginx --non-interactive --agree-tos --email iuri.petrola@gmail.com -d sonhomeuloja.com
 
 # Copiar arquivos de configuraçao do ssl
-COPY ssl/letsencrypt /etc/letsencrypt
+#COPY ssl/letsencrypt /etc/letsencrypt
 
 # Copiar arquivos de comfiguraçao do proxy
-COPY sonhomeu.conf /etc/nginx/conf.d
-COPY sonhomeu.conf /etc/nginx/sites-available
-RUN ln -s /etc/nginx/sites-available/sonhomeu.conf /etc/nginx/sites-enabled/
+#COPY sonhomeu.conf /etc/nginx/conf.d
+#COPY sonhomeu.conf /etc/nginx/sites-available
+#RUN ln -s /etc/nginx/sites-available/sonhomeu.conf /etc/nginx/sites-enabled/
 
 CMD ["nginx", "-g", "daemon off;"]
 
