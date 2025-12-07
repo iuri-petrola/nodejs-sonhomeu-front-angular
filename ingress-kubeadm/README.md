@@ -1,146 +1,83 @@
+# Service tipo LoadBalancer/NodePort com HTTPS externo (Nginx standalone)
 
-# pacote completo para ativar HTTPS automático no seu Ingress com Let's Encrypt utilizando o cert-manager no seu cluster kubeadm.
+# Essa abordagem funciona assim:
 
-# ✅ 1. Instalar o Ingress-NGINX (método oficial — obrigatório no kubeadm)
+# ✔️ Kubernetes expõe seu front como LoadBalancer (ou NodePort, se for bare metal).
+# ✔️ Nginx externo (fora do cluster) fica responsável por:
 
-# Execute no control-plane:
+# servir HTTPS
+# redirecionar o tráfego para o service do Kubernetes
+# gerenciar certificados (Let's Encrypt com certbot)
 
-  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml
+# ✅ Arquitetura simplificada
+# Internet → Nginx (HTTPS) → Kubernetes Service (LoadBalancer/NodePort) → Deployment Angular
 
-# Esse é o manifesto oficial para Bare Metal / kubeadm, com Deployment + Service NodePort.
+# 🔧 PASSO 1 — Criar o Service do front como LoadBalancer
 
-# A instalação leva +- 1 minuto.
+# Se você estiver usando Kubeadm, provavelmente não tem provedor de LoadBalancer.
+# Neste caso, vamos usar NodePort (também funciona com Nginx externo).
 
-# ✅ 2. Verificar se o ingress subiu
+# Crie o service:
 
-  kubectl get pods -n ingress-nginx
+apiVersion: v1
+kind: Service
+metadata:
+  name: someu-front-service
+spec:
+  type: NodePort
+  selector:
+    app: someu-front
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30000
 
-# Você deve ver algo como:
-
-# ingress-nginx-controller-xxxxx   Running
-
-
-# 🟦 3. Instalar o cert-manager (oficial e recomendado)
-
-# Execute no cluster:
-
-  kubectl apply -f https://github.com/cert-manager/cert-manager/releases/latest/download/cert-manager.yaml
-
-# Aguarde de 30 a 60 segundos e confira:
-  
-  kubectl get pods -n cert-manager
-
-# Você deve ver:
-
-  # cert-manager-xxxxxxx     Running
-  # cert-manager-webhook.... Running
-  # cert-manager-cainjector. Running
-
-
-# 🟩 4. ClusterIssuer – Let's Encrypt (STAGING)
-
-# Use para testar sem limite de requisições.
-
-# Crie o arquivo: clusterissuer-staging.yaml
-
-  apiVersion: cert-manager.io/v1
-  kind: ClusterIssuer
-  metadata:
-    name: letsencrypt-staging
-  spec:
-    acme:
-      email: iuri.petrola@gmail.com
-      server: https://acme-staging-v02.api.letsencrypt.org/directory
-      privateKeySecretRef:
-        name: letsencrypt-staging-key
-      solvers:
-        - http01:
-            ingress:
-              class: nginx
-# Aplicar:
-
-  kubectl apply -f clusterissuer-staging.yaml
-
-# 🟥 5. ClusterIssuer – Let's Encrypt (PRODUÇÃO)
-
-# O que você vai usar no seu domínio sonhomeuloja.com.
-
-# Crie o arquivo: clusterissuer-prod.yaml
-
-  apiVersion: cert-manager.io/v1
-  kind: ClusterIssuer
-  metadata:
-    name: letsencrypt-prod
-  spec:
-    acme:
-      email: iuri.petrola@gmail.com
-      server: https://acme-v02.api.letsencrypt.org/directory
-      privateKeySecretRef:
-        name: letsencrypt-prod-key
-      solvers:
-        - http01:
-            ingress:
-              class: nginx
 
 # Aplicar:
 
-  kubectl apply -f clusterissuer-prod.yaml
-
-# 📝 Verificar se está OK
-
-  kubectl describe clusterissuer letsencrypt-prod
-
-# Se aparecer:
-
-  Status: True
-  Ready: True
-
-# ➡️ cert-manager está funcionando.
-
-# 🔐 Agora seu Ingress vai gerar certificado automático
+  kubectl apply -f service.yaml
 
 
-# 🟥 6 Criar o Ingress (HTTPS com domínio sonhomeuloja.com)
+# 🔧 PASSO 2 — Instalar Nginx + Certbot na máquina que ficará na frente do cluster
+# No servidor externo (ou no próprio node, se preferir):
 
-  apiVersion: networking.k8s.io/v1
-  kind: Ingress
-  metadata:
-    name: someu-front-ingress
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-  spec:
-    tls:
-      - hosts:
-          - sonhomeuloja.com
-        secretName: someu-front-tls
-    rules:
-      - host: sonhomeuloja.com
-        http:
-          paths:
-            - path: /
-              pathType: Prefix
-              backend:
-                service:
-                  name: nodejs-someu-front-angular
-                  port:
-                    number: 443
+  sudo apt update
+  sudo apt install nginx certbot python3-certbot-nginx -y
+
+# 🔧 PASSO 3 — Configurar o Nginx como reverse proxy com HTTPS
+#  Exemplo de config:
+
+server {
+    listen 80;
+    server_name seu-dominio.com www.seu-dominio.com;
+
+    location / {
+        proxy_pass http://IP_DO_NODE:30000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
 
 
-# Então basta aplicar o ingress:
+# Salvar em:  /etc/nginx/sites-available/sonhomeuloja.com
 
-  kubectl apply -f ingress.yaml
 
-# Depois acompanhe:
+# Habilitar:
 
-  kubectl get certificate
-  kubectl get challenge
-  kubectl get order
+  sudo ln -s /etc/nginx/sites-available/sonhomeuloja.com /etc/nginx/sites-enabled/
+  sudo nginx -t
+  sudo systemctl reload nginx
 
-# E no final você verá:
+# 🔧 PASSO 4 — Gerar o HTTPS (Let's Encrypt)
 
-# someu-front-tls   True
+  sudo certbot --nginx -d sonhomeuloja.com -d www.sonhomeuloja.com
 
-# Esse é o certificado gerado.
+# Ele vai:
 
-# 🎉 Pronto! HTTPS automatizado funcionando no kubeadm + ingress-nginx.
+# ✔️ validar o domínio
+# ✔️ gerar o certificado
+# ✔️ alterar o nginx automaticamente para HTTPS
+# ✔️ configurar renovação automática
+
