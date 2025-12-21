@@ -2,7 +2,7 @@ name: Build Frontend
 
 on:
   push:
-    branches: [develop]
+    branches: [kubernetes]
   workflow_dispatch:
 
 jobs:
